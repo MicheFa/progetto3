@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pagina con sfondo e frame video</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+    }
+
+    #background img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #video-frame {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+
+    #video-frame iframe {
+      width: 1200px;
+      height: 640px;
+      transform: scale(2);
+      transform-origin: top left;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="background">
+    <img src="affariTuoi_delfino.jpg" alt="Sfondo">
+  </div>
+  <div id="video-frame">
+    <iframe id="video-iframe" src="http://admin:admin@192.168.1.143:81/videostream.cgi?rate=0&user=admin&pwd=admin" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    var videoFrame = document.getElementById('video-frame');
+    var videoIframe = document.getElementById('video-iframe');
+    var isVideoVisible = true;
+
+    window.addEventListener('keydown', function(event) {
+      if (event.ctrlKey && event.shiftKey && event.altKey) {
+        toggleVideoFrame();
+      }
+    });
+
+    function toggleVideoFrame() {
+      if (isVideoVisible) {
+        videoFrame.style.display = 'none';
+      } else {
+        videoFrame.style.display = 'flex';
+      }
+      isVideoVisible = !isVideoVisible;
+    }
+  </script>
+</body>
+</html>
